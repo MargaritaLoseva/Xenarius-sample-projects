@@ -1,0 +1,1 @@
+# Xenarius SamplesThis repository contains sample projects for Xenarius tutorials.* TicketDesk - contains projects for [Building Hybrid Mobile App to Reinforce Your ASP.NET MVC Website](https://xenarius.net/2016/04/26/TicketDesk.html) tutorial.

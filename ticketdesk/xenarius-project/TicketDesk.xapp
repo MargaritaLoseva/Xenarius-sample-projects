@@ -1,0 +1,484 @@
+{
+  "id": "ticket_desk",
+  "title": "TicketDesk",
+  "platforms": [
+    {
+      "name": "DesktopRule",
+      "layout": "desktop",
+      "options": {
+        "deviceType": "desktop"
+      }
+    },
+    {
+      "name": "PhoneRule",
+      "layout": "slideout",
+      "options": {
+        "deviceType": "phone"
+      }
+    },
+    {
+      "name": "TabletRule",
+      "layout": "split",
+      "options": {
+        "deviceType": "tablet"
+      }
+    }
+  ],
+  "model": [
+    {
+      "name": "authenticated",
+      "type": "boolean",
+      "defaultValue": false,
+      "persistent": true,
+      "isCalculatedDefaultValue": null
+    }
+  ],
+  "dataStores": [
+    {
+      "type": "odata",
+      "load": {
+        "debugUrlExpr": "''",
+        "urlExpr": "''",
+        "method": "get"
+      },
+      "byKey": {
+        "debugUrlExpr": "''",
+        "urlExpr": "''",
+        "method": "get"
+      },
+      "insert": {
+        "debugUrlExpr": "''",
+        "urlExpr": "''",
+        "method": "post"
+      },
+      "update": {
+        "debugUrlExpr": "''",
+        "urlExpr": "''",
+        "method": "patch"
+      },
+      "remove": {
+        "debugUrlExpr": "''",
+        "urlExpr": "''",
+        "method": "delete"
+      },
+      "totalCount": {
+        "debugUrlExpr": "''",
+        "urlExpr": "''",
+        "method": "get"
+      },
+      "id": "dataProvider1",
+      "name": "Tickets",
+      "url": "http://localhost:44373/odata/ODataTickets",
+      "debugUrl": "http://localhost:44373/odata/ODataTickets",
+      "key": "TicketId",
+      "keyType": "Int32",
+      "version": 3,
+      "withCredentials": true,
+      "headers": []
+    }
+  ],
+  "globalFunctions": [
+    {
+      "name": "uf_globalFunction1"
+    }
+  ],
+  "views": [
+    {
+      "commands": [
+        {
+          "id": "Save",
+          "title": "Save",
+          "icon": "save",
+          "disabled": false,
+          "visible": true,
+          "buttonType": "normal",
+          "showIcon": {
+            "phone": true,
+            "tablet": true,
+            "desktop": false
+          },
+          "showText": {
+            "phone": false,
+            "tablet": false,
+            "desktop": true
+          },
+          "onExecute": {
+            "logic": {
+              "variables": [],
+              "calls": [
+                {
+                  "_type": "Save",
+                  "objectExpr": "$model.ticket",
+                  "storeId": "dataProvider1"
+                },
+                {
+                  "_type": "NavigateBack"
+                }
+              ]
+            }
+          },
+          "type": "command"
+        }
+      ],
+      "model": [],
+      "params": [
+        {
+          "name": "ticket",
+          "type": "object",
+          "defaultValue": {},
+          "expand": null
+        }
+      ],
+      "dataSources": [],
+      "type": "view",
+      "functions": [],
+      "id": "IncidentDetailsView",
+      "name": "TicketDetailsView",
+      "title": "Ticket Details",
+      "scrollable": true,
+      "components": [
+        {
+          "type": "fieldset",
+          "id": "fieldset1",
+          "style": {
+            "height": "40px"
+          },
+          "fields": [
+            {
+              "type": "input",
+              "title": "Id",
+              "id": "field3",
+              "value": "$model.ticket.TicketId",
+              "placeholder": "specified by service"
+            },
+            {
+              "type": "input",
+              "title": "Title",
+              "id": "field4",
+              "value": "$model.ticket.Title"
+            },
+            {
+              "type": "input",
+              "title": "Status",
+              "id": "field6",
+              "value": "$model.ticket.TicketStatus"
+            },
+            {
+              "type": "input",
+              "title": "ProjectID",
+              "id": "field11",
+              "value": "$model.ticket.ProjectId"
+            },
+            {
+              "type": "input",
+              "title": "Category",
+              "id": "field8",
+              "value": "$model.ticket.Category"
+            },
+            {
+              "type": "input",
+              "title": "Type",
+              "id": "field10",
+              "value": "$model.ticket.TicketType"
+            },
+            {
+              "type": "input",
+              "title": "Details",
+              "id": "field9",
+              "value": "$model.ticket.Details"
+            },
+            {
+              "type": "input",
+              "title": "CreatedBy",
+              "id": "field7",
+              "value": "$model.ticket.CreatedBy"
+            },
+            {
+              "type": "input",
+              "title": "Owner",
+              "id": "field5",
+              "value": "$model.ticket.Owner"
+            },
+            {
+              "type": "input",
+              "title": "Current Status Set by",
+              "id": "field2",
+              "value": "$model.ticket.CurrentStatusSetBy"
+            },
+            {
+              "type": "input",
+              "title": "Last Update by",
+              "id": "field1",
+              "value": "$model.ticket.LastUpdateBy"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "view",
+      "params": [],
+      "model": [],
+      "functions": [],
+      "dataSources": [
+        {
+          "id": "TicketsDataSource",
+          "store": "dataProvider1",
+          "refreshOnViewShown": "whenChanges",
+          "calculatedFields": [],
+          "filter": "",
+          "sort": {
+            "getter": "CreatedDate",
+            "desc": true
+          }
+        }
+      ],
+      "commands": [
+        {
+          "id": "ADD",
+          "title": "Title",
+          "icon": "add",
+          "disabled": false,
+          "visible": true,
+          "buttonType": "normal",
+          "showIcon": {
+            "phone": true,
+            "tablet": true,
+            "desktop": false
+          },
+          "showText": {
+            "phone": false,
+            "tablet": false,
+            "desktop": true
+          },
+          "onExecute": {
+            "logic": {
+              "variables": [],
+              "calls": [
+                {
+                  "_type": "NavigateToView",
+                  "viewId": "IncidentDetailsView"
+                }
+              ]
+            }
+          },
+          "type": "command"
+        }
+      ],
+      "id": "IncidentsView",
+      "name": "TicketsView",
+      "title": "Tickets",
+      "components": [
+        {
+          "type": "list",
+          "id": "TicketsList",
+          "dataSource": "$model.TicketsDataSource",
+          "editConfig": {
+            "allowItemDeleting": true,
+            "itemDeleteMode": "slideItem"
+          },
+          "onItemClick": {
+            "logic": {
+              "variables": [],
+              "calls": [
+                {
+                  "_type": "NavigateToView",
+                  "viewIdExpr": "",
+                  "viewParametersExpr": "",
+                  "viewId": "IncidentDetailsView",
+                  "viewParameters": [
+                    {
+                      "name": "ticket",
+                      "valueExpr": "$data"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "itemComponents": [
+            {
+              "type": "label",
+              "id": "TitleLabel",
+              "style": {
+                "marginTop": "10px",
+                "marginLeft": "10px",
+                "marginBottom": "10px",
+                "marginRight": "10px",
+                "fontFamily": "Arial",
+                "fontSize": "20px"
+              },
+              "text": "$data.Title"
+            },
+            {
+              "type": "label",
+              "id": "Status",
+              "style": {
+                "height": "14px",
+                "marginTop": "10px",
+                "marginLeft": "10px",
+                "marginBottom": "10px",
+                "marginRight": "10px",
+                "fontFamily": "Arial",
+                "fontSize": "12px"
+              },
+              "text": "$data.TicketStatus"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "view",
+      "params": [],
+      "model": [
+        {
+          "name": "login"
+        },
+        {
+          "name": "password"
+        }
+      ],
+      "functions": [],
+      "dataSources": [],
+      "commands": [],
+      "id": "view1",
+      "name": "LoginView",
+      "title": "Login",
+      "components": [
+        {
+          "type": "input",
+          "id": "login",
+          "style": {
+            "height": "36px"
+          },
+          "value": "$model.login"
+        },
+        {
+          "type": "input",
+          "id": "password",
+          "style": {
+            "height": "36px"
+          },
+          "value": "$model.password"
+        },
+        {
+          "type": "button",
+          "id": "loginButton",
+          "style": {
+            "height": "36px"
+          },
+          "text": "Log in",
+          "onClick": {
+            "logic": {
+              "variables": [
+                {
+                  "name": "response",
+                  "type": "string",
+                  "value": ""
+                },
+                {
+                  "name": "error",
+                  "type": "string",
+                  "value": ""
+                }
+              ],
+              "calls": [
+                {
+                  "_type": "SendRequest",
+                  "urlExpr": "'http://localhost:44373/api/ApiAccount/Login'",
+                  "method": "POST",
+                  "dataExpr": "{ Email: $model.login, Password: $model.password }",
+                  "variableName": "response",
+                  "errorVariableName": "error",
+                  "cacheResponse": false,
+                  "withCredentials": true
+                },
+                {
+                  "_type": "Switch",
+                  "expr": "!!error",
+                  "cases": [
+                    {
+                      "calls": [
+                        {
+                          "_type": "SetValue",
+                          "leftExpr": "$global.authenticated",
+                          "valueExpr": "true"
+                        },
+                        {
+                          "_type": "NavigateToView",
+                          "viewId": "IncidentsView"
+                        }
+                      ],
+                      "valueExpr": "false"
+                    }
+                  ],
+                  "otherwise": [
+                    {
+                      "_type": "ShowAlert",
+                      "titleExpr": "Error",
+                      "messageExpr": "Invalid email or password."
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "navigation": {
+    "defaultView": "view1",
+    "title": "Navigation",
+    "items": [
+      {
+        "id": "IncidentsView",
+        "icon": null,
+        "visible": true,
+        "onExecute": null,
+        "title": "Tickets"
+      },
+      {
+        "id": "view1",
+        "onExecute": null,
+        "title": "Login",
+        "icon": null,
+        "visible": true
+      }
+    ]
+  },
+  "authentication": {
+    "loginView": null,
+    "url": null,
+    "requestMethod": null,
+    "headersExpr": null,
+    "dataExpr": null
+  },
+  "authorization": {
+    "allowAnonymous": false,
+    "locations": [],
+    "loginView": "view1"
+  },
+  "description": null,
+  "author": {
+    "name": null,
+    "email": null,
+    "website": null
+  },
+  "params": [],
+  "icon": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAIAAADdvvtQAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAABD1JREFUeNrs3E1LFWsAwPEz1kJ3FbSJLgZCtuiNyqysyLpFkb1Bi7Z9g/sh7rZVHyCIFi2EFgWCBVLSi3Xv7QUJCloIEYShbkohcjqne2rmmTlahBPN8PutnFExPP+eZ+Z5zhh9PNVTg5/V5leAgBAQAkJAICAEhIAQEAgIASEgBAQCQkAICAGBgBAQAkJACAgEhIAQEAICASEgBISAQEAICAEhIBAQAkJACAgBgYAQEAJCQCAgBISAEBAICAEhIAQEAkJACAgBgYAQEAJCQAgIBISAEBACAgEhIASEgEBACAgBISAQEAJCQAgIAYGAEBACQkAgIASEgBAQCAgBISAEBAJCQAgIASEgEBACQkAICASEgBAQAgIBISAEhIBAQAgIASEgEBACQkAICAGBgBAQAkJAICAEhIAQEAgIASEgKmS5X0FZ/+v/9Xf0x7pvh/ODl+P7w/kvW3bhSvpw/tLFeHxMQNRq795GB44kPfUf+5QLKNp9JOpanxzPzS5tPaawEpu/cTVoZfO22orV2YB69wff8mDUNRBfzUzG40+Sw/aOtv6B7Ku7ZUf6ML51XUCkgvj3fjDebN8dHG7sra1clXzxm9dLPn8JqOSz2LVL9cuaVDFbo87u5HDPwaC2eyNu48kNQs/+C0adfclldbS1Z5FrJgHxJYuRoSCgPf3NDzq7ozVrk87qV0szkwIiNwLVb92np5KA1qz9fxZLD0WNzm4PF/QPEFD5B6Gn/+RnsWjDpuTU3Gx8c1BALDAIhTfnjVlsxer6BXVSWAHLPwKqUEDjY/Vb9PQsllkQKmL5R0DVaii8RY8On0g+Vczyj4CqFdBocI0c3H8Vs/wjoGoFNPEi2NZIX2IXs/wjoMo1FG5rNE8+vFvQ8o+AKnczP3KjxclHd4v+uQKqipnJxniTNj1V3PKPgKo4i314HxxOvfsFP1RA1ZF590/UtT69OS8gFpN590/zZLgjJiAWfiFPnmtx8tBxAfFjI9DmbS3OrlzVGJkExHdexTPna+0drcP684SA+N7wE74bOr232rZrn4BYtJ7O7vSbN+JXL2uvJ5JPt3dEh88KiIUDCm+14sdjmQXotp4+AbHwSxjeasWjw/Gj20FhO/vyzxwKiC9x5B/+mniRfeaw8eDzgIBo9fqFyz/xy+fNDzLPHO49JCBajUDh8s+3d69mNueL29YQUJmHn8zyz/RU8u7V3CxW0LaGgMo8/ITLP5nnezKzWEHbGgIqrfDZnUYxY3eCnuqzWOrJ+YK2NQRU2vlrINw9nZvN/oWy+iyWeXK+gG0NAZV2/vr6GHxz+AlbaQ5CmRXFArY1/Im7ctZTv6Wa/dDYtUgmrKH8l8U3B+Ojp4Nv3Ni7tI+JRR9P9Xg9MIUhIASEgEBACAgBISAQEAJCQAgIBISAEBACAgEhIASEgBAQCAgBISAEBAJCQPzOPgswAOz3/y8bsF2MAAAAAElFTkSuQmCC",
+  "appProtocol": null,
+  "theme": {
+    "colorHue": "",
+    "colorAccent": "",
+    "colorSelectedText": "",
+    "appearance": "generic"
+  },
+  "functions": [
+    {
+      "name": "uf_globalFunction1",
+      "function": null
+    }
+  ]
+}
