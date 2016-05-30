@@ -132,7 +132,7 @@
       "dataSources": [],
       "type": "view",
       "functions": [],
-      "id": "IncidentDetailsView",
+      "id": "TicketDetailsView",
       "name": "TicketDetailsView",
       "title": "Ticket Details",
       "scrollable": true,
@@ -257,7 +257,7 @@
               "calls": [
                 {
                   "_type": "NavigateToView",
-                  "viewId": "IncidentDetailsView"
+                  "viewId": "TicketDetailsView"
                 }
               ]
             }
@@ -265,7 +265,7 @@
           "type": "command"
         }
       ],
-      "id": "IncidentsView",
+      "id": "TicketsView",
       "name": "TicketsView",
       "title": "Tickets",
       "components": [
@@ -285,7 +285,7 @@
                   "_type": "NavigateToView",
                   "viewIdExpr": "",
                   "viewParametersExpr": "",
-                  "viewId": "IncidentDetailsView",
+                  "viewId": "TicketDetailsView",
                   "viewParameters": [
                     {
                       "name": "ticket",
@@ -342,31 +342,40 @@
       "functions": [],
       "dataSources": [],
       "commands": [],
-      "id": "view1",
       "name": "LoginView",
+      "id": "view1",
       "title": "Login",
       "components": [
         {
-          "type": "input",
-          "id": "login",
-          "style": {
-            "height": "36px"
-          },
-          "value": "$model.login"
-        },
-        {
-          "type": "input",
-          "id": "password",
-          "style": {
-            "height": "36px"
-          },
-          "value": "$model.password"
+          "type": "fieldset",
+          "id": "fieldset1",
+          "fields": [
+            {
+              "type": "input",
+              "id": "login",
+              "style": {
+                "height": "36px"
+              },
+              "value": "$model.login",
+              "title": "Login"
+            },
+            {
+              "type": "input",
+              "id": "password",
+              "style": {
+                "height": "36px"
+              },
+              "value": "$model.password",
+              "title": "Password"
+            }
+          ]
         },
         {
           "type": "button",
           "id": "loginButton",
           "style": {
-            "height": "36px"
+            "height": "36px",
+            "marginLeft": "125px"
           },
           "text": "Log in",
           "onClick": {
@@ -407,7 +416,7 @@
                         },
                         {
                           "_type": "NavigateToView",
-                          "viewId": "IncidentsView"
+                          "viewId": "TicketsView"
                         }
                       ],
                       "valueExpr": "false"
@@ -433,7 +442,7 @@
     "title": "Navigation",
     "items": [
       {
-        "id": "IncidentsView",
+        "id": "TicketsView",
         "icon": null,
         "visible": true,
         "onExecute": null,
